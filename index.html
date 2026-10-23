@@ -36,18 +36,11 @@
             --border: #333333;
         }
 
-        /* Scalable Font Classes working off Root HTML font-size */
         html {
             font-size: var(--base-font);
         }
-
-        html.font-large {
-            --base-font: 19px;
-        }
-
-        html.font-xlarge {
-            --base-font: 22px;
-        }
+        html.font-large { --base-font: 19px; }
+        html.font-xlarge { --base-font: 22px; }
 
         html, body {
             background-color: var(--bg-body);
@@ -65,7 +58,7 @@
             position: relative;
         }
 
-        /* Map Container Fills Entire Screen Background */
+        /* Map Container */
         #map-container {
             position: absolute;
             top: 0;
@@ -78,6 +71,43 @@
         #map {
             width: 100%;
             height: 100%;
+        }
+
+        /* Center Map Picker Reticle & Confirmation Banner */
+        #map-picker-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1500;
+            pointer-events: none;
+            display: none;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .map-reticle {
+            font-size: 2.5rem;
+            color: var(--accent);
+            text-shadow: 0 2px 6px rgba(0,0,0,0.3);
+            margin-bottom: 30px; /* Offset for pin point */
+        }
+
+        .map-picker-banner {
+            position: absolute;
+            top: 20px;
+            background: var(--card-bg);
+            border: 2px solid var(--accent);
+            padding: 10px 20px;
+            border-radius: 30px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            font-weight: bold;
+            display: flex;
+            gap: 15px;
+            align-items: center;
+            pointer-events: auto;
+            z-index: 1600;
         }
 
         /* Sidebar Desktop Layout */
@@ -256,7 +286,7 @@
         }
 
         .btn-icon {
-            padding: 0 12px;
+            padding: 0 10px;
             background: var(--primary-light);
             border: 2px solid var(--border);
             border-radius: 8px;
@@ -265,8 +295,8 @@
             font-weight: bold;
             display: flex;
             align-items: center;
-            gap: 5px;
-            font-size: 0.85rem;
+            gap: 4px;
+            font-size: 0.8rem;
         }
 
         .btn-icon:hover {
@@ -502,11 +532,11 @@
                 border-top: 3px solid var(--accent);
                 border-radius: 16px 16px 0 0;
                 box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.25);
-                transform: translateY(calc(100% - 62px)); /* Collapsed state showing header bar */
+                transform: translateY(calc(100% - 62px));
             }
 
             .sidebar.expanded {
-                transform: translateY(0); /* Expanded state */
+                transform: translateY(0);
             }
 
             .mobile-drag-handle {
@@ -537,6 +567,16 @@
     <!-- Map Area (Absolute background layer) -->
     <div id="map-container">
         <div id="map"></div>
+    </div>
+
+    <!-- Map Center Picker Reticle Overlay -->
+    <div id="map-picker-overlay">
+        <div class="map-picker-banner">
+            <span id="picker-instruction">Move map to target location</span>
+            <button class="btn btn-accent" style="width: auto; padding: 6px 14px; margin-top: 0;" onclick="confirmMapPinSelection()">Confirm Location</button>
+            <button class="btn" style="width: auto; padding: 6px 14px; margin-top: 0; background: #888;" onclick="cancelMapPinSelection()">Cancel</button>
+        </div>
+        <div class="map-reticle"><i class="fa-solid fa-location-crosshairs"></i></div>
     </div>
 
     <!-- Sidebar Control Panel (Floating overlay) -->
@@ -577,6 +617,7 @@
                     <div class="input-wrapper">
                         <input type="text" class="input-box" id="start-search" placeholder="Search start location..." oninput="searchAddress(this.value, 'start-suggestions', 'start')">
                         <button class="btn-icon" onclick="getGPSLocation()"><i class="fa-solid fa-crosshairs"></i> GPS</button>
+                        <button class="btn-icon" onclick="startMapPicker('start')" title="Pick on Map"><i class="fa-solid fa-map-pin"></i> Map</button>
                     </div>
                     <div class="suggestions-box" id="start-suggestions"></div>
                 </div>
@@ -588,6 +629,7 @@
                     </label>
                     <div class="input-wrapper">
                         <input type="text" class="input-box" id="dest-search" placeholder="Search destination address..." oninput="searchAddress(this.value, 'dest-suggestions', 'dest')">
+                        <button class="btn-icon" onclick="startMapPicker('dest')" title="Pick on Map"><i class="fa-solid fa-map-pin"></i> Map</button>
                     </div>
                     <div class="suggestions-box" id="dest-suggestions"></div>
                 </div>
@@ -599,7 +641,10 @@
             <div id="loop-panel" style="display: none;">
                 <div class="form-group">
                     <label><i class="fa-solid fa-house" style="color: var(--accent);"></i> Starting Point</label>
-                    <input type="text" class="input-box" id="loop-start-input" value="Birdhill, San Francisco" readonly>
+                    <div class="input-wrapper">
+                        <input type="text" class="input-box" id="loop-start-input" value="Birdhill, San Francisco" readonly>
+                        <button class="btn-icon" onclick="startMapPicker('loop-start')" title="Pick on Map"><i class="fa-solid fa-map-pin"></i> Map</button>
+                    </div>
                 </div>
                 <div class="form-group slider-container">
                     <div class="slider-header">
@@ -681,6 +726,7 @@
         let isDarkMode = false;
         let isMobileMenuExpanded = false;
         let tileLayer = null;
+        let activeMapPickerTarget = null; // 'start', 'dest', or 'loop-start'
 
         let currentStartCoords = [37.7412, -122.4867]; // Birdhill area
         let currentDestCoords = [37.7480, -122.4820];  // Fieldgate area
@@ -777,6 +823,7 @@
             }
         }
 
+        // AUTOCOMPLETE WITH LOCAL GEOGRAPHIC BOUNDING FILTER (~60-minute walking distance / ~3 miles box)
         let searchDebounce = null;
         function searchAddress(query, targetBoxId, type) {
             clearTimeout(searchDebounce);
@@ -786,8 +833,17 @@
                 return;
             }
 
+            // Calculate bounding box around current starting point (~0.05 degrees ~= 3.5 miles / ~60 min walking limit)
+            const lat = currentStartCoords[0];
+            const lon = currentStartCoords[1];
+            const delta = 0.05; 
+            const viewbox = `${lon - delta},${lat + delta},${lon + delta},${lat - delta}`;
+
             searchDebounce = setTimeout(() => {
-                fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(query)}&limit=4`)
+                // Nominatim API call restricted to local viewbox and bounded strictly within area
+                const url = `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(query)}&viewbox=${viewbox}&bounded=1&limit=5`;
+                
+                fetch(url)
                     .then(res => res.json())
                     .then(data => {
                         box.innerHTML = '';
@@ -817,6 +873,67 @@
                         box.style.display = 'block';
                     });
             }, 300);
+        }
+
+        // MAP PICKER MODE LOGIC
+        function startMapPicker(targetType) {
+            activeMapPickerTarget = targetType;
+            document.getElementById('map-picker-overlay').style.display = 'flex';
+            
+            // On mobile, collapse sidebar so user has full view of the map while positioning
+            if (window.innerWidth <= 768 && isMobileMenuExpanded) {
+                toggleMobileMenu();
+            }
+        }
+
+        function cancelMapPinSelection() {
+            activeMapPickerTarget = null;
+            document.getElementById('map-picker-overlay').style.display = 'none';
+        }
+
+        function confirmMapPinSelection() {
+            if (!activeMapPickerTarget) return;
+
+            // Get center coordinates of the map where the crosshair reticle is resting
+            const center = map.getCenter();
+            const lat = center.lat;
+            const lon = center.lng;
+
+            // Reverse geocode using Nominatim to find the closest address name
+            fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lon}`)
+                .then(res => res.json())
+                .then(data => {
+                    const addressName = data.display_name ? data.display_name.split(',')[0] : "Custom Map Location";
+                    const coords = [lat, lon];
+
+                    if (activeMapPickerTarget === 'start') {
+                        currentStartCoords = coords;
+                        document.getElementById('start-search').value = addressName;
+                        document.getElementById('loop-start-input').value = addressName;
+                    } else if (activeMapPickerTarget === 'dest') {
+                        currentDestCoords = coords;
+                        document.getElementById('dest-search').value = addressName;
+                    } else if (activeMapPickerTarget === 'loop-start') {
+                        currentStartCoords = coords;
+                        document.getElementById('loop-start-input').value = addressName;
+                    }
+
+                    updateMarkers();
+                    cancelMapPinSelection();
+                })
+                .catch(() => {
+                    // Fallback if reverse geocoding fails
+                    const coords = [lat, lon];
+                    if (activeMapPickerTarget === 'start') {
+                        currentStartCoords = coords;
+                        document.getElementById('start-search').value = "Pinned Location";
+                    } else {
+                        currentDestCoords = coords;
+                        document.getElementById('dest-search').value = "Pinned Location";
+                    }
+                    updateMarkers();
+                    cancelMapPinSelection();
+                });
         }
 
         function getGPSLocation() {
