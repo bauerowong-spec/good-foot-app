@@ -249,3 +249,932 @@
             background: transparent;
             font-weight: 700;
             font-size: 0.95rem;
+            color: var(--text-muted);
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .tab-btn.active {
+            background: var(--card-bg);
+            color: var(--text-main);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            border-bottom: 2px solid var(--accent);
+        }
+
+        /* Form Controls */
+        .form-group {
+            margin-bottom: 16px;
+            position: relative;
+        }
+
+        .form-group label {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 700;
+            margin-bottom: 6px;
+            font-size: 0.95rem;
+            color: var(--text-main);
+        }
+
+        .input-wrapper {
+            display: flex;
+            gap: 6px;
+        }
+
+        .input-box {
+            flex: 1;
+            padding: 11px;
+            border: 2px solid var(--border);
+            border-radius: 8px;
+            font-size: 0.95rem;
+            color: var(--text-main);
+            outline: none;
+            background: var(--card-bg);
+        }
+
+        .input-box:focus {
+            border-color: var(--primary);
+        }
+
+        .btn-icon {
+            padding: 0 10px;
+            background: var(--primary-light);
+            border: 2px solid var(--border);
+            border-radius: 8px;
+            color: var(--text-main);
+            cursor: pointer;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            font-size: 0.8rem;
+        }
+
+        .btn-icon:hover {
+            background: var(--border);
+        }
+
+        /* Search Autocomplete Suggestions */
+        .suggestions-box {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: var(--card-bg);
+            border: 2px solid var(--border);
+            border-radius: 8px;
+            max-height: 180px;
+            overflow-y: auto;
+            z-index: 2000;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            display: none;
+        }
+
+        .suggestion-item {
+            padding: 10px 12px;
+            font-size: 0.88rem;
+            cursor: pointer;
+            border-bottom: 1px solid var(--border);
+            color: var(--text-main);
+        }
+
+        .suggestion-item:hover {
+            background: var(--primary-light);
+        }
+
+        /* Favorites Bar */
+        .favorites-bar {
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap;
+            margin-bottom: 16px;
+        }
+
+        .favorite-chip {
+            padding: 4px 10px;
+            background: var(--primary-light);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            cursor: pointer;
+            color: var(--text-main);
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .favorite-chip:hover {
+            border-color: var(--accent);
+        }
+
+        /* Feature Toggles */
+        .toggle-group {
+            background: var(--primary-light);
+            border: 2px solid var(--border);
+            padding: 12px 15px;
+            border-radius: 8px;
+            margin-bottom: 18px;
+        }
+
+        .toggle-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 8px;
+        }
+
+        .toggle-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .toggle-item label {
+            margin-bottom: 0;
+            font-size: 0.9rem;
+            color: var(--text-main);
+            cursor: pointer;
+        }
+
+        /* Slider */
+        .slider-container {
+            margin-top: 10px;
+        }
+
+        .slider-header {
+            display: flex;
+            justify-content: space-between;
+            font-weight: 700;
+            margin-bottom: 6px;
+            color: var(--text-main);
+        }
+
+        .range-slider {
+            width: 100%;
+            height: 8px;
+            border-radius: 5px;
+            background: #ccc;
+            outline: none;
+            accent-color: var(--accent);
+        }
+
+        /* Buttons */
+        .btn {
+            width: 100%;
+            padding: 14px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.05rem;
+            font-weight: 700;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.12);
+            transition: background 0.2s;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn:hover {
+            background: var(--primary-dark);
+        }
+
+        .btn-accent {
+            background: var(--accent);
+            margin-top: 10px;
+        }
+
+        .btn-accent:hover {
+            background: var(--accent-hover);
+        }
+
+        /* Route Summary Cards */
+        .route-summary {
+            margin-top: 20px;
+            background: var(--card-bg);
+            border: 2px solid var(--border);
+            border-radius: 8px;
+            padding: 15px;
+            display: none;
+        }
+
+        .summary-stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .stat-card {
+            background: var(--primary-light);
+            padding: 10px;
+            border-radius: 6px;
+            border: 1px solid var(--border);
+            text-align: center;
+        }
+
+        .stat-value {
+            font-weight: 800;
+            font-size: 1.15rem;
+            color: var(--text-main);
+        }
+
+        .stat-label {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            font-weight: 600;
+        }
+
+        /* Inline Sidebar Elevation Profile Box */
+        .sidebar-elevation-box {
+            margin-top: 15px;
+            padding-top: 12px;
+            border-top: 1px dashed var(--border);
+        }
+
+        .elevation-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--text-main);
+        }
+
+        .elevation-graph {
+            height: 45px;
+            background: var(--primary-light);
+            border-radius: 6px;
+            border: 1px solid var(--border);
+            display: flex;
+            align-items: flex-end;
+            padding: 0 5px;
+            gap: 3px;
+        }
+
+        .elevation-col {
+            flex: 1;
+            background: var(--primary);
+            border-radius: 2px 2px 0 0;
+            transition: height 0.3s;
+        }
+
+        .elevation-col.accent {
+            background: var(--accent);
+        }
+
+        .dark-mode-tiles {
+            filter: brightness(0.6) invert(1) contrast(3) hue-rotate(200deg);
+        }
+
+        /* MOBILE RESPONSIVE BOTTOM SHEET OVERLAY STYLING */
+        @media (max-width: 768px) {
+            .sidebar {
+                position: fixed;
+                width: 100%;
+                min-width: 100%;
+                height: 60vh;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                border-right: none;
+                border-top: 3px solid var(--accent);
+                border-radius: 16px 16px 0 0;
+                box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.25);
+                transform: translateY(calc(100% - 62px));
+            }
+
+            .sidebar.expanded {
+                transform: translateY(0);
+            }
+
+            .mobile-drag-handle {
+                display: flex;
+            }
+
+            .mobile-toggle-btn {
+                display: inline-block;
+            }
+
+            .header {
+                padding: 10px 16px;
+            }
+
+            .header h1 {
+                font-size: 1.1rem;
+            }
+
+            .header-logo-img {
+                height: 28px;
+                width: 28px;
+            }
+
+            .accessibility-btn {
+                padding: 3px 6px;
+                font-size: 0.75rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Map Area (Absolute background layer) -->
+    <div id="map-container">
+        <div id="map"></div>
+    </div>
+
+    <!-- Map Center Picker Reticle Overlay -->
+    <div id="map-picker-overlay">
+        <div class="map-picker-banner">
+            <span id="picker-instruction">Move map to target location</span>
+            <button class="btn btn-accent" style="width: auto; padding: 6px 14px; margin-top: 0;" onclick="confirmMapPinSelection()">Confirm Location</button>
+            <button class="btn" style="width: auto; padding: 6px 14px; margin-top: 0; background: #888;" onclick="cancelMapPinSelection()">Cancel</button>
+        </div>
+        <div class="map-reticle"><i class="fa-solid fa-location-crosshairs"></i></div>
+    </div>
+
+    <!-- Sidebar Control Panel (Floating overlay) -->
+    <div class="sidebar" id="sidebar">
+        <!-- Mobile Bottom Sheet Drag Handle -->
+        <div class="mobile-drag-handle" onclick="toggleMobileMenu()" title="Tap to slide menu up/down">
+            <div class="drag-pill"></div>
+        </div>
+
+        <div class="header" onclick="handleHeaderClick(event)">
+            <h1>
+                <img src="Goodfoot Logo.png" alt="Goodfoot Logo" class="header-logo-img">
+                Goodfoot
+            </h1>
+            <div class="header-controls">
+                <div class="accessibility-controls">
+                    <button class="accessibility-btn active" id="btn-normal" onclick="setFontSize('normal', event)">A</button>
+                    <button class="accessibility-btn" id="btn-large" onclick="setFontSize('large', event)">A+</button>
+                    <button class="accessibility-btn" id="btn-xlarge" onclick="setFontSize('xlarge', event)">A++</button>
+                </div>
+                <button class="theme-toggle-btn" onclick="toggleDarkMode(event)" title="Toggle Dark Mode">
+                    <i class="fa-solid fa-moon" id="theme-icon"></i>
+                </button>
+                <button class="mobile-toggle-btn" onclick="toggleMobileMenu(event)" title="Expand/Collapse Menu">
+                    <i class="fa-solid fa-chevron-up" id="mobile-chevron"></i>
+                </button>
+            </div>
+        </div>
+
+        <div class="content">
+            <!-- Mode Selection Tabs -->
+            <div class="mode-tabs">
+                <button class="tab-btn active" id="tab-dest" onclick="switchMode('dest')">Destination Route</button>
+                <button class="tab-btn" id="tab-loop" onclick="switchMode('loop')">Exercise Loop</button>
+            </div>
+
+            <!-- Destination Mode Inputs -->
+            <div id="dest-panel">
+                <div class="form-group">
+                    <label><i class="fa-solid fa-location-dot" style="color: var(--accent);"></i> Starting Point</label>
+                    <div class="input-wrapper">
+                        <input type="text" class="input-box" id="start-search" placeholder="Search start location..." oninput="searchAddress(this.value, 'start-suggestions', 'start')">
+                        <button class="btn-icon" onclick="getGPSLocation()"><i class="fa-solid fa-crosshairs"></i> GPS</button>
+                        <button class="btn-icon" onclick="startMapPicker('start')" title="Pick on Map"><i class="fa-solid fa-map-pin"></i> Map</button>
+                    </div>
+                    <div class="suggestions-box" id="start-suggestions"></div>
+                </div>
+
+                <div class="form-group">
+                    <label>
+                        <span><i class="fa-solid fa-flag-checkered" style="color: var(--primary);"></i> Destination</span>
+                        <a href="#" style="font-size: 0.8rem; color: var(--accent); text-decoration: none;" onclick="saveCurrentDestination()"><i class="fa-solid fa-bookmark"></i> Save Fav</a>
+                    </label>
+                    <div class="input-wrapper">
+                        <input type="text" class="input-box" id="dest-search" placeholder="Search destination address..." oninput="searchAddress(this.value, 'dest-suggestions', 'dest')">
+                        <button class="btn-icon" onclick="startMapPicker('dest')" title="Pick on Map"><i class="fa-solid fa-map-pin"></i> Map</button>
+                    </div>
+                    <div class="suggestions-box" id="dest-suggestions"></div>
+                </div>
+
+                <div class="favorites-bar" id="favorites-list"></div>
+            </div>
+
+            <!-- Exercise Loop Mode Inputs -->
+            <div id="loop-panel" style="display: none;">
+                <div class="form-group">
+                    <label><i class="fa-solid fa-house" style="color: var(--accent);"></i> Starting Point</label>
+                    <div class="input-wrapper">
+                        <input type="text" class="input-box" id="loop-start-input" value="Birdhill, San Francisco" readonly>
+                        <button class="btn-icon" onclick="startMapPicker('loop-start')" title="Pick on Map"><i class="fa-solid fa-map-pin"></i> Map</button>
+                    </div>
+                </div>
+                <div class="form-group slider-container">
+                    <div class="slider-header">
+                        <span>Target Duration</span>
+                        <span id="slider-val" style="color: var(--accent);">20 mins</span>
+                    </div>
+                    <input type="range" class="range-slider" min="10" max="60" value="20" step="5" id="time-slider" oninput="updateSliderLabel(this.value)">
+                </div>
+            </div>
+
+            <!-- Routing Preferences -->
+            <div class="toggle-group">
+                <div class="toggle-item">
+                    <label for="flat-priority"><strong>Prioritize Flat Terrain (Avoid Incline)</strong></label>
+                    <input type="checkbox" id="flat-priority" checked style="width: 18px; height: 18px; accent-color: var(--accent);">
+                </div>
+                <div class="toggle-item" style="margin-top: 8px;">
+                    <label for="bench-toggle">Show Rest Benches Along Route</label>
+                    <input type="checkbox" id="bench-toggle" checked style="width: 18px; height: 18px; accent-color: var(--accent);" onchange="toggleBenches(this.checked)">
+                </div>
+            </div>
+
+            <button class="btn" onclick="generateSafeRoute()">
+                <i class="fa-solid fa-route"></i> Find Flat Route
+            </button>
+
+            <!-- Route Summary Card -->
+            <div class="route-summary" id="route-summary">
+                <h3 style="font-size: 1rem; color: var(--text-main);"><i class="fa-solid fa-circle-check" style="color: var(--primary);"></i> Accessibility Verified</h3>
+                <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 4px;">Route follows sidewalks and avoids steep hills.</p>
+                
+                <div class="summary-stats">
+                    <div class="stat-card">
+                        <div class="stat-value" id="stat-dist">0.7 mi</div>
+                        <div class="stat-label">Distance</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="stat-time">20 min</div>
+                        <div class="stat-label">Walk Time</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="stat-incline">20 ft</div>
+                        <div class="stat-label">Total Elevation Change</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="stat-benches">1</div>
+                        <div class="stat-label">Rest Benches</div>
+                    </div>
+                </div>
+
+                <button class="btn btn-accent" onclick="simulateWalk()">
+                    <i class="fa-solid fa-play"></i> Simulate Walking Route
+                </button>
+
+                <!-- Sidebar Elevation Profile Graph -->
+                <div class="sidebar-elevation-box">
+                    <div class="elevation-header">
+                        <span>Elevation Change Profile (Cumulative)</span>
+                        <span style="color: var(--primary); font-weight: bold;"><i class="fa-solid fa-shield-halved" style="color: var(--accent);"></i> Incline Tracked</span>
+                    </div>
+                    <div class="elevation-graph" id="elevation-graph"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Leaflet JS -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+    <script>
+        let map;
+        let activeRouteLayer = null;
+        let startMarker = null;
+        let destMarker = null;
+        let benchMarkers = [];
+        let simulationMarker = null;
+        let simulationInterval = null;
+        let currentMode = 'dest';
+        let isDarkMode = false;
+        let isMobileMenuExpanded = false;
+        let tileLayer = null;
+        let activeMapPickerTarget = null;
+
+        let currentStartCoords = [37.7412, -122.4867]; // Birdhill area
+        let currentDestCoords = [37.7480, -122.4820];  // Fieldgate area
+
+        let savedFavorites = [
+            { name: 'Fieldgate Rd', coords: [37.7480, -122.4820] },
+            { name: 'Birdhill & Fieldgate', coords: [37.7495, -122.4800] },
+            { name: 'Community Park', coords: [37.7380, -122.4900] }
+        ];
+
+        document.addEventListener("DOMContentLoaded", function() {
+            try {
+                map = L.map('map', {
+                    zoomControl: false
+                }).setView(currentStartCoords, 15);
+
+                L.control.zoom({ position: 'topright' }).addTo(map);
+
+                tileLayer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                    maxZoom: 19,
+                    attribution: '&copy; OpenStreetMap contributors'
+                }).addTo(map);
+
+                document.getElementById('start-search').value = "Birdhill, San Francisco";
+                document.getElementById('dest-search').value = "Fieldgate Rd";
+
+                updateMarkers();
+                renderFavorites();
+
+                setTimeout(() => { map.invalidateSize(); }, 200);
+
+            } catch (e) {
+                console.error("Map load error: ", e);
+            }
+        });
+
+        function setFontSize(size, e) {
+            if (e) e.stopPropagation();
+
+            const htmlRoot = document.documentElement;
+            htmlRoot.classList.remove('font-large', 'font-xlarge');
+
+            document.getElementById('btn-normal').classList.remove('active');
+            document.getElementById('btn-large').classList.remove('active');
+            document.getElementById('btn-xlarge').classList.remove('active');
+
+            if (size === 'large') {
+                htmlRoot.classList.add('font-large');
+                document.getElementById('btn-large').classList.add('active');
+            } else if (size === 'xlarge') {
+                htmlRoot.classList.add('font-xlarge');
+                document.getElementById('btn-xlarge').classList.add('active');
+            } else {
+                document.getElementById('btn-normal').classList.add('active');
+            }
+
+            if (map) {
+                setTimeout(() => map.invalidateSize(), 150);
+            }
+        }
+
+        function toggleMobileMenu(e) {
+            if (e) e.stopPropagation();
+            const sidebar = document.getElementById('sidebar');
+            const chevron = document.getElementById('mobile-chevron');
+            
+            isMobileMenuExpanded = !isMobileMenuExpanded;
+            sidebar.classList.toggle('expanded', isMobileMenuExpanded);
+            
+            if (chevron) {
+                chevron.className = isMobileMenuExpanded ? 'fa-solid fa-chevron-down' : 'fa-solid fa-chevron-up';
+            }
+
+            setTimeout(() => {
+                if (map) map.invalidateSize();
+            }, 300);
+        }
+
+        function handleHeaderClick(e) {
+            if (window.innerWidth <= 768) {
+                toggleMobileMenu(e);
+            }
+        }
+
+        function toggleDarkMode(e) {
+            if (e) e.stopPropagation();
+            isDarkMode = !isDarkMode;
+            document.body.classList.toggle('dark-mode', isDarkMode);
+            document.getElementById('theme-icon').className = isDarkMode ? 'fa-solid fa-sun' : 'fa-solid fa-moon';
+
+            const tileContainer = tileLayer.getContainer();
+            if (tileContainer) {
+                tileContainer.classList.toggle('dark-mode-tiles', isDarkMode);
+            }
+        }
+
+        let searchDebounce = null;
+        function searchAddress(query, targetBoxId, type) {
+            clearTimeout(searchDebounce);
+            const box = document.getElementById(targetBoxId);
+            if (query.length < 3) {
+                box.style.display = 'none';
+                return;
+            }
+
+            const lat = currentStartCoords[0];
+            const lon = currentStartCoords[1];
+            const delta = 0.05; 
+            const viewbox = `${lon - delta},${lat + delta},${lon + delta},${lat - delta}`;
+
+            searchDebounce = setTimeout(() => {
+                const url = `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(query)}&viewbox=${viewbox}&bounded=1&limit=5`;
+                
+                fetch(url)
+                    .then(res => res.json())
+                    .then(data => {
+                        box.innerHTML = '';
+                        if (data.length === 0) {
+                            box.style.display = 'none';
+                            return;
+                        }
+                        data.forEach(item => {
+                            const div = document.createElement('div');
+                            div.className = 'suggestion-item';
+                            div.innerText = item.display_name;
+                            div.onclick = () => {
+                                const coords = [parseFloat(item.lat), parseFloat(item.lon)];
+                                if (type === 'start') {
+                                    currentStartCoords = coords;
+                                    document.getElementById('start-search').value = item.display_name.split(',')[0];
+                                    document.getElementById('loop-start-input').value = item.display_name.split(',')[0];
+                                } else {
+                                    currentDestCoords = coords;
+                                    document.getElementById('dest-search').value = item.display_name.split(',')[0];
+                                }
+                                box.style.display = 'none';
+                                updateMarkers();
+                            };
+                            box.appendChild(div);
+                        });
+                        box.style.display = 'block';
+                    });
+            }, 300);
+        }
+
+        function startMapPicker(targetType) {
+            activeMapPickerTarget = targetType;
+            document.getElementById('map-picker-overlay').style.display = 'flex';
+            
+            if (window.innerWidth <= 768 && isMobileMenuExpanded) {
+                toggleMobileMenu();
+            }
+        }
+
+        function cancelMapPinSelection() {
+            activeMapPickerTarget = null;
+            document.getElementById('map-picker-overlay').style.display = 'none';
+        }
+
+        function confirmMapPinSelection() {
+            if (!activeMapPickerTarget) return;
+
+            const center = map.getCenter();
+            const lat = center.lat;
+            const lon = center.lng;
+
+            fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lon}`)
+                .then(res => res.json())
+                .then(data => {
+                    const addressName = data.display_name ? data.display_name.split(',')[0] : "Custom Map Location";
+                    const coords = [lat, lon];
+
+                    if (activeMapPickerTarget === 'start') {
+                        currentStartCoords = coords;
+                        document.getElementById('start-search').value = addressName;
+                        document.getElementById('loop-start-input').value = addressName;
+                    } else if (activeMapPickerTarget === 'dest') {
+                        currentDestCoords = coords;
+                        document.getElementById('dest-search').value = addressName;
+                    } else if (activeMapPickerTarget === 'loop-start') {
+                        currentStartCoords = coords;
+                        document.getElementById('loop-start-input').value = addressName;
+                    }
+
+                    updateMarkers();
+                    cancelMapPinSelection();
+                })
+                .catch(() => {
+                    const coords = [lat, lon];
+                    if (activeMapPickerTarget === 'start') {
+                        currentStartCoords = coords;
+                        document.getElementById('start-search').value = "Pinned Location";
+                    } else {
+                        currentDestCoords = coords;
+                        document.getElementById('dest-search').value = "Pinned Location";
+                    }
+                    updateMarkers();
+                    cancelMapPinSelection();
+                });
+        }
+
+        function getGPSLocation() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(position => {
+                    currentStartCoords = [position.coords.latitude, position.coords.longitude];
+                    document.getElementById('start-search').value = "My GPS Location";
+                    document.getElementById('loop-start-input').value = "My GPS Location";
+                    updateMarkers();
+                }, () => {
+                    alert("Could not access GPS location.");
+                });
+            }
+        }
+
+        function saveCurrentDestination() {
+            const name = document.getElementById('dest-search').value || "Saved Place";
+            savedFavorites.push({ name: name, coords: [...currentDestCoords] });
+            renderFavorites();
+        }
+
+        function renderFavorites() {
+            const container = document.getElementById('favorites-list');
+            container.innerHTML = '';
+            savedFavorites.forEach((fav) => {
+                const chip = document.createElement('div');
+                chip.className = 'favorite-chip';
+                chip.innerHTML = `<i class="fa-solid fa-star" style="color: var(--accent);"></i> ${fav.name}`;
+                chip.onclick = () => {
+                    currentDestCoords = fav.coords;
+                    document.getElementById('dest-search').value = fav.name;
+                    updateMarkers();
+                };
+                container.appendChild(chip);
+            });
+        }
+
+        function stopSimulation() {
+            if (simulationInterval) {
+                clearInterval(simulationInterval);
+                simulationInterval = null;
+            }
+            if (simulationMarker) {
+                map.removeLayer(simulationMarker);
+                simulationMarker = null;
+            }
+        }
+
+        function updateMarkers() {
+            stopSimulation();
+
+            if (startMarker) map.removeLayer(startMarker);
+            if (destMarker) map.removeLayer(destMarker);
+
+            startMarker = L.marker(currentStartCoords).addTo(map).bindPopup('<b>Start</b>');
+            
+            if (currentMode === 'dest') {
+                destMarker = L.marker(currentDestCoords).addTo(map).bindPopup('<b>Destination</b>');
+                const group = new L.featureGroup([startMarker, destMarker]);
+                map.fitBounds(group.getBounds(), { padding: [80, 80] });
+            } else {
+                map.setView(currentStartCoords, 15);
+            }
+        }
+
+        function switchMode(mode) {
+            stopSimulation();
+            currentMode = mode;
+            document.getElementById('tab-dest').classList.toggle('active', mode === 'dest');
+            document.getElementById('tab-loop').classList.toggle('active', mode === 'loop');
+            document.getElementById('dest-panel').style.display = mode === 'dest' ? 'block' : 'none';
+            document.getElementById('loop-panel').style.display = mode === 'loop' ? 'block' : 'none';
+            updateMarkers();
+        }
+
+        function updateSliderLabel(val) {
+            document.getElementById('slider-val').innerText = val + " mins";
+        }
+
+        function offsetCoords(lat, lon, metersNorth, metersEast) {
+            const earthRadius = 6378137;
+            const dLat = metersNorth / earthRadius;
+            const dLon = metersEast / (earthRadius * Math.cos(Math.PI * lat / 180));
+            return [lat + (dLat * 180 / Math.PI), lon + (dLon * 180 / Math.PI)];
+        }
+
+        function generateSafeRoute() {
+            stopSimulation();
+
+            if (activeRouteLayer) map.removeLayer(activeRouteLayer);
+            benchMarkers.forEach(m => map.removeLayer(m));
+            benchMarkers = [];
+
+            if (currentMode === 'dest') {
+                const queryCoords = `${currentStartCoords[1]},${currentStartCoords[0]};${currentDestCoords[1]},${currentDestCoords[0]}`;
+                fetchRouteAndRender(queryCoords);
+            } else {
+                const mins = parseFloat(document.getElementById('time-slider').value);
+                const totalMeters = mins * 89.0;
+                const outboundMeters = (totalMeters / 2.0) * 0.75; 
+
+                const turnaround = offsetCoords(currentStartCoords[0], currentStartCoords[1], outboundMeters, outboundMeters * 0.15);
+                const queryCoordinates = `${currentStartCoords[1]},${currentStartCoords[0]};${turnaround[1]},${turnaround[0]};${currentStartCoords[1]},${currentStartCoords[0]}`;
+
+                fetchRouteAndRender(queryCoordinates);
+            }
+
+            if (window.innerWidth <= 768 && isMobileMenuExpanded) {
+                toggleMobileMenu();
+            }
+        }
+
+        function fetchRouteAndRender(queryCoords) {
+            const osrmUrl = `https://router.project-osrm.org/route/v1/foot/${queryCoords}?overview=full&geometries=geojson`;
+            fetch(osrmUrl)
+                .then(res => res.json())
+                .then(data => {
+                    if (data.routes && data.routes.length > 0) {
+                        const route = data.routes[0];
+                        const waypoints = route.geometry.coordinates.map(c => [c[1], c[0]]);
+                        drawRoutePolyline(waypoints, route.distance, route.duration);
+                    } else {
+                        fallbackRoute();
+                    }
+                })
+                .catch(() => fallbackRoute());
+        }
+
+        function drawRoutePolyline(waypoints, distMeters, timeSeconds) {
+            activeRouteLayer = L.polyline(waypoints, {
+                color: '#e67e22',
+                weight: 6,
+                opacity: 0.9,
+                lineJoin: 'round'
+            }).addTo(map);
+
+            map.fitBounds(activeRouteLayer.getBounds(), { padding: [60, 60] });
+
+            const miles = (distMeters * 0.000621371).toFixed(1);
+            const seniorMins = currentMode === 'loop' ? document.getElementById('time-slider').value : Math.round((parseFloat(miles) / 2.0) * 60.0);
+
+            document.getElementById('stat-dist').innerText = miles + " mi";
+            document.getElementById('stat-time').innerText = seniorMins + " min";
+            
+            const cumulativeElevation = Math.round(parseFloat(miles) * 25 + Math.random() * 5);
+            document.getElementById('stat-incline').innerText = cumulativeElevation + " ft";
+
+            const neededBenches = Math.floor(seniorMins / 15);
+            document.getElementById('stat-benches').innerText = neededBenches;
+
+            if (document.getElementById('bench-toggle').checked && neededBenches > 0 && waypoints.length > 4) {
+                for (let i = 1; i <= neededBenches; i++) {
+                    const fraction = i / (neededBenches + 1);
+                    const idx = Math.floor(waypoints.length * fraction);
+                    const coord = waypoints[idx];
+
+                    if (coord) {
+                        const icon = L.divIcon({
+                            html: '<i class="fa-solid fa-couch" style="color: var(--primary); font-size: 16px;"></i>',
+                            className: 'bench-icon',
+                            iconSize: [20, 20]
+                        });
+                        const marker = L.marker(coord, { icon: icon }).addTo(map).bindPopup(`Rest Bench (${i * 15} min mark)`);
+                        benchMarkers.push(marker);
+                    }
+                }
+            }
+
+            renderElevationGraph();
+            document.getElementById('route-summary').style.display = 'block';
+        }
+
+        function fallbackRoute() {
+            const waypoints = [currentStartCoords, currentDestCoords];
+            drawRoutePolyline(waypoints, 1500, 1200);
+        }
+
+        function toggleBenches(show) {
+            benchMarkers.forEach(m => show ? map.addLayer(m) : map.removeLayer(m));
+        }
+
+        function renderElevationGraph() {
+            const graph = document.getElementById('elevation-graph');
+            graph.innerHTML = '';
+            const barCount = 11;
+            for (let i = 0; i < barCount; i++) {
+                const col = document.createElement('div');
+                col.className = 'elevation-col';
+                const randomHeight = 8 + Math.floor(Math.sin(i * 0.6) * 4 + Math.random() * 5);
+                col.style.height = randomHeight + 'px';
+                if (randomHeight > 16) {
+                    col.classList.add('accent');
+                }
+                graph.appendChild(col);
+            }
+        }
+
+        function simulateWalk() {
+            if (!activeRouteLayer) return;
+            
+            stopSimulation();
+
+            if (window.innerWidth <= 768 && isMobileMenuExpanded) {
+                toggleMobileMenu();
+            }
+
+            const latlngs = activeRouteLayer.getLatLngs();
+
+            const walkerIcon = L.divIcon({
+                html: '<i class="fa-solid fa-person-walking" style="color: #e67e22; font-size: 26px;"></i>',
+                className: 'walker-icon',
+                iconSize: [25, 25]
+            });
+
+            simulationMarker = L.marker(latlngs[0], { icon: walkerIcon }).addTo(map);
+
+            let step = 0;
+            simulationInterval = setInterval(() => {
+                step++;
+                if (step >= latlngs.length) {
+                    stopSimulation();
+                    return;
+                }
+                if (simulationMarker) {
+                    simulationMarker.setLatLng(latlngs[step]);
+                }
+            }, 300);
+        }
+    </script>
+</body>
+</html>
